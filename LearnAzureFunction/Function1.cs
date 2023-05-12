@@ -25,8 +25,11 @@ namespace LearnAzureFunction
             dynamic data = JsonConvert.DeserializeObject(requestBody);
             name = name ?? data?.name;
 
+
+            var variable = Environment.GetEnvironmentVariable("MY_SUPERDUPER_VARIABLE");
+
             string responseMessage = string.IsNullOrEmpty(name)
-                ? "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
+                ? "This HTTP triggered function executed successfully. " + variable
                 : $"Hello, {name}. This HTTP triggered function executed successfully.";
 
             return new OkObjectResult(responseMessage);
